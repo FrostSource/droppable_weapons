@@ -1,0 +1,10 @@
+{
+  "VScriptInstalled": true,
+  "SoundEventInstalled": false,
+  "PanoramaInstalled": false,
+  "GitInstalled": true,
+  "ModFolderName": "droppable_weapons",
+  "Version": "3.0.0",
+  "EditorType": "VisualStudioCode",
+  "FileRemovalGlobs": []
+}

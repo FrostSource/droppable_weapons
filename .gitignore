@@ -1,0 +1,18 @@
+# Source 2 ignores
+
+/_bakeresourcecache/
+*bakeresourcecache.vpk
+__pycache__
+
+# AlyxLib ignores
+
+scripts/vscripts/alyxlib
+scripts/vscripts/game/gameinit.lua
+.vscode/alyxlib.code-snippets
+.vscode/vlua_snippets.code-snippets
+panorama/scripts/custom_game/panorama_lua.js
+panorama/scripts/custom_game/panoramadoc.js
+
+panorama/layout/custom_game/alyxlib_debug_menu.xml
+panorama/scripts/custom_game/alyxlib_debug_menu.js
+panorama/styles/custom_game/alyxlib_debug_menu.css
