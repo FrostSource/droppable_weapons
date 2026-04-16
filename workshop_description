@@ -1,0 +1,48 @@
+[h1]Droppable Weapons[/h1]
+
+Allows you to physically drop your weapons and pick them back up again.
+
+[i]This addon requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3329679071]AlyxLib[/url] to work.[/i]
+[i]This addon is compatible with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3692545530]Akimbo Pistols[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3144612716]Body Holsters[/url][/i]
+
+[h2]How To Use[/h2]
+
+Grip your controller while the weapon is equipped, then release the grip to drop the weapon. Grab the weapon again with the same hand to re-equip it.
+
+If you've dropped an Akimbo weapon you [i]must[/i] pick it up with your off-hand to equip it.
+
+[h2]Console Commands[/h2]
+
+Console commands allow you to customize and tweak the addon while playing. They are not required to use the addon, and for most users the default values will provide a good experience.
+
+If you don't know how to use the console, follow this guide: https://steamcommunity.com/sharedfiles/filedetails/?id=2040205272
+
+[hr][/hr]
+[list]
+
+[*][b]droppable_weapons_always_use_weapon_model[/b]
+Default = 0
+If enabled, the dropped physics proxy will always use the weapon model instead of a custom one if set.
+[i]This convar is persistent with your save file.[/i]
+
+[/list]
+
+[hr][/hr]
+Console commands can be set in the [url=https://help.steampowered.com/faqs/view/7D01-D2DD-D75E-2955]launch options[/url] for Half-Life: Alyx, just put a hyphen before each name and the value after, e.g. [b]-droppable_weapons_always_use_weapon_model 1[/b]
+They can also be added to your [b]Half-Life Alyx\game\hlvr\cfg\skill.cfg[/b] file, one per line without the hyphen, e.g. [b]droppable_weapons_always_use_weapon_model 1[/b]
+
+[h2]Source Code[/h2]
+
+GitHub: https://github.com/FrostSource/droppable_weapons
+
+[h2]Known Issues[/h2]
+
+Weapon physics do not match upgraded parts or all weapon states.
+
+Custom weapons might not have accurate physics shapes. You can use `droppable_weapons_always_use_weapon_model 1` to mitigate this at the cost of having weird hand poses.
+
+[h2]Getting Help[/h2]
+
+Please feel free to reach out either by commenting below or on the Discord server!
+
+[url=https://discord.gg/42SC3Wyjv4][img]https://steamuserimages-a.akamaihd.net/ugc/2397692528302959470/036A75FE4B2E8CD2224F8B62E7CEBEE649493C40/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img][/url]
