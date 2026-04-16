@@ -154,13 +154,14 @@ end)
 ---Called when the player opens their hand to drop a weapon.
 ---@param event InputReleaseCallback
 local function onUngrip(event)
-    -- if event.hand == Player.PrimaryHand then
-    --     local weapon = Player:GetWeapon()
-    --     if weapon and weapon:GetClassname() ~= 'hlvr_multitool' then
-    --         DroppableWeapons:DropWeapon(weapon)
-    --     end
-    -- end
-    DroppableWeapons:DropWeapon(nil, event.hand)
+    if utils.isBodyHolstersEnabled() then
+        ---@diagnostic disable-next-line: undefined-global
+        if not BodyHolsters:IsHandInAvailableSlot(event.hand) then
+            DroppableWeapons:DropWeapon(nil, event.hand)
+        end
+    else
+        DroppableWeapons:DropWeapon(nil, event.hand)
+    end
 end
 
 Input:ListenToButton('release', handKind, DIGITAL_INPUT_USE_GRIP, nil, onUngrip)

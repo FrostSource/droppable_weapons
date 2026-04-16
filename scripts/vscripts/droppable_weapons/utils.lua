@@ -10,6 +10,13 @@ function M.isAkimboEnabled()
 end
 
 ---
+---Checks if the Body Holsters mod is enabled.
+---
+function M.isBodyHolstersEnabled()
+    return IsAddonEnabled('3144612716') or IsAddonEnabled('body_holsters')
+end
+
+---
 ---Enables rendering for an entity and all children
 ---except for entities that are normally invisible
 ---
