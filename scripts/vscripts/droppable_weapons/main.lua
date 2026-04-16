@@ -44,6 +44,10 @@ function DroppableWeapons:GetDropModelForWeapon(weapon)
 
     local model
 
+    if Convars:GetBool('droppable_weapons_always_use_weapon_model') then
+        return weapon:GetModelName()
+    end
+
     local modelOrFn = proxyModels[cls]
     if type(modelOrFn) == 'function' then
         model = modelOrFn(weapon)
