@@ -6,5 +6,8 @@
   "ModFolderName": "droppable_weapons",
   "Version": "3.0.0",
   "EditorType": "VisualStudioCode",
-  "FileRemovalGlobs": []
+  "FileRemovalGlobs": [
+    "saves/",
+    "maps/"
+  ]
 }
