@@ -34,6 +34,11 @@ function DroppableWeapons:SetProxyModelForWeapon(weaponClass, modelOrFn)
     proxyModels[weaponClass] = modelOrFn
 end
 
+---
+---Gets the model that will be used for a dropped weapon's physics proxy.
+---
+---@param weapon EntityHandle
+---@return string
 function DroppableWeapons:GetDropModelForWeapon(weapon)
     local cls = weapon:GetClassname()
 
@@ -49,13 +54,15 @@ function DroppableWeapons:GetDropModelForWeapon(weapon)
     return model or weapon:GetModelName()
 end
 
+---
 ---Drops a weapon from the player as a physical object.
----@param weaponHandle? EntityHandle
----@param hand? CPropVRHand
----@param isEquipped? boolean
+---
+---@param weaponHandle? EntityHandle # The weapon to drop. If not provided, will attempt to drop the currently held weapon.
+---@param hand? CPropVRHand # The hand to drop from. If not provided, will attempt to drop from the hand holding the weapon, or primary hand if both are holding it or if no weapon is held.
+---@param isEquipped? boolean # Whether the weapon is currently equipped. If not provided, will attempt to determine based on the hand holding it.
 ---@param velocity? Vector # If not provided, will default to the hand's velocity * 2
 ---@param torque? Vector # If not provided, will default to the hand's angular velocity
----@return EntityHandle?
+---@return EntityHandle? # The dropped weapon proxy entity, or nil if the drop failed
 function DroppableWeapons:DropWeapon(weaponHandle, hand, isEquipped, velocity, torque)
     if weaponHandle == nil then
         if hand ~= nil then
@@ -111,7 +118,6 @@ end
 ListenToPlayerEvent('item_pickup', function(event)
     local item = event.item
     if not (item and IsValidEntity(item) and item:GetIntAttr('DroppedWeapon') == 1) then
-        print(item, IsValidEntity(item), item and item:GetIntAttr('DroppedWeapon'))
         return
     end
 
@@ -126,12 +132,12 @@ ListenToPlayerEvent('item_pickup', function(event)
 
     if isAkimboWeapon then
         if event.hand ~= Player.SecondaryHand then
-            print('Not picking up akimbo weapon with hand', event.hand == Player.PrimaryHand and 'Primary' or 'Secondary')
+            devprint2('Not picking up akimbo weapon with hand', event.hand == Player.PrimaryHand and 'Primary' or 'Secondary')
             return
         end
     else
         if event.hand ~= Player.PrimaryHand then
-            print('Not picking up weapon with hand', event.hand == Player.PrimaryHand and 'Primary' or 'Secondary')
+            devprint2('Not picking up weapon with hand', event.hand == Player.PrimaryHand and 'Primary' or 'Secondary')
             return
         end
     end
