@@ -1,0 +1,144 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc28:version{fb63b6ca-f435-4aa0-a2c7-c66ddc651dca} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "vr_flip_shotgun_body"
+						filename = "models/weapons/droppable/dmx/render/shotgun_open_render.dmx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+				disabled = true
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFile"
+						parent_bone = ""
+						surface_prop = "prop.metal_gun"
+						collision_prop = "default"
+						recenter_on_parent_bone = false
+						offset_origin = [ 0.42315, 0.0, 0.003251 ]
+						offset_angles = [ 0.000014, 90.0, 105.0 ]
+						filename = "models/weapons/droppable/dmx/vr_flip_shotgun_body_hull.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "PhysicsHullFile"
+						parent_bone = ""
+						surface_prop = "prop.metal_gun"
+						collision_prop = "default"
+						recenter_on_parent_bone = false
+						offset_origin = [ 2.42315, 0.0, 1.10325 ]
+						offset_angles = [ 0.000014, 90.0, 145.0 ]
+						filename = "models/weapons/droppable/dmx/vr_flip_shotgun_body_hull1.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "prop.metal_gun"
+						collision_prop = "default"
+						origin = [ 1.0, 0.043275, 1.0 ]
+						angles = [ 15.0, 0.0, 0.0 ]
+						dimensions = [ 7.36807, 1.66589, 1.96641 ]
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "prop_data"
+						game_keys = 
+						{
+							base = ""
+							allowstatic = false
+							damage_table = ""
+							"dmg.bullets" = -1.0
+							"dmg.club" = -1.0
+							"dmg.explosive" = -1.0
+							"dmg.fire" = -1.0
+							health = -1.0
+							spawn_motion_disabled = false
+							bakelighting = true
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "hand_pose_pair"
+						game_keys = 
+						{
+							sequence = "grab"
+							pose_special_type = "0"
+							conform_fingers = false
+							allow_flip = false
+							parent_bone = ""
+							origin_left = [ 0.941307, -0.21498, 4.66584 ]
+							angles_left = [ 13.8195, -116.851, 42.5972 ]
+							origin_right = [ 0.941307, 0.21498, 4.66584 ]
+							angles_right = [ 13.819498, 116.850998, -42.597202 ]
+							max_distance = 3.0
+							finger_thumb = 0.694
+							finger_pinky = 0.803
+							finger_ring = 0.783
+							finger_middle = 0.772
+							finger_index = 0.826
+							has_extent = false
+							show_extent_helper = false
+							extent_origin_left = [ 0.0, 0.0, 2.0 ]
+							extent_origin_min_left = [ 0.0, 0.0, -1.0 ]
+							extent_origin_right = [ 0.0, -0.0, 2.0 ]
+							extent_origin_min_right = [ 0.0, 0.0, 1.0 ]
+							has_rotation = false
+							rotation_axis0 = [ 0.0, 0.0, 10.0 ]
+							rotation_axis1 = [ 0.0, 0.0, -10.0 ]
+							rotation_min = 0.0
+							rotation_max = 0.0
+							pivot_min = 0.0
+							pivot_max = 0.0
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "animgraphs/vr_flip_shotgun_body.vanmgrph"
+	}
+}

@@ -3,19 +3,50 @@ local utils = require('droppable_weapons.utils')
 
 local handKind = utils.isAkimboEnabled() and InputHandBoth or InputHandPrimary
 
--- GlobalPrecache:Add("model_folder", "models/weapons/droppable/")
+GlobalPrecache:Add("model_folder", "models/weapons/droppable/")
 
 DroppableWeapons = {}
 
-local function getDropModelForWeapon(weapon)
+---@type table<string, string|fun(weapon: EntityHandle): string?>
+local proxyModels = {
+    ['hlvr_weapon_energygun'] = 'models/weapons/droppable/vr_alyxgun.vmdl',
+    ['hlvr_weapon_rapidfire'] = 'models/weapons/droppable/vr_ipistol.vmdl',
+    ['hlvr_weapon_shotgun'] = function(weapon)
+        for _, child in ipairs(weapon:GetTopChildren()) do
+            if child:GetClassname() == 'prop_animinteractable' and child:GetCycle() > 0.9 then
+                return 'models/weapons/droppable/vr_shotgun_open.vmdl'
+            end
+        end
+
+        return 'models/weapons/droppable/vr_shotgun.vmdl'
+    end,
+}
+
+---
+---Sets a custom model for the dropped physics proxy of a specific weapon class.
+---Can be a string (model path) or a function that takes the weapon entity and returns a model path.
+---
+---Make the model is precached.
+---
+---@param weaponClass string
+---@param modelOrFn string|fun(weapon: EntityHandle): string?
+function DroppableWeapons:SetProxyModelForWeapon(weaponClass, modelOrFn)
+    proxyModels[weaponClass] = modelOrFn
+end
+
+function DroppableWeapons:GetDropModelForWeapon(weapon)
     local cls = weapon:GetClassname()
 
-    -- testing only
-    return weapon:GetModelName()
+    local model
 
-    -- if cls == 'hlvr_weapon_energygun' then
-    --     -- return 'models/weapons/vr_alyxgun/
-    -- end
+    local modelOrFn = proxyModels[cls]
+    if type(modelOrFn) == 'function' then
+        model = modelOrFn(weapon)
+    else
+        model = modelOrFn
+    end
+
+    return model or weapon:GetModelName()
 end
 
 ---Drops a weapon from the player as a physical object.
@@ -43,7 +74,7 @@ function DroppableWeapons:DropWeapon(weaponHandle, hand, isEquipped, velocity, t
     local name = DoUniqueString('dropped_weapon_' .. weaponHandle:GetClassname())
 
     local dropProxy = SpawnEntityFromTableSynchronous('prop_physics', {
-        model = getDropModelForWeapon(weaponHandle),
+        model = self:GetDropModelForWeapon(weaponHandle),
         origin = weaponHandle:GetOrigin(),
         angles = weaponHandle:GetAngles(),
         targetname = name,
