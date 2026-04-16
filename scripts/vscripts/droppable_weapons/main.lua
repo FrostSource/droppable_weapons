@@ -164,7 +164,8 @@ end)
 ---Called when the player opens their hand to drop a weapon.
 ---@param event InputReleaseCallback
 local function onUngrip(event)
-    if utils.isBodyHolstersEnabled() then
+    ---@diagnostic disable-next-line: undefined-global
+    if utils.isBodyHolstersEnabled() and type(BodyHolsters) == "table" then
         ---@diagnostic disable-next-line: undefined-global
         if not BodyHolsters:IsHandInAvailableSlot(event.hand) then
             DroppableWeapons:DropWeapon(nil, event.hand)
