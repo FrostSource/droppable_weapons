@@ -173,7 +173,7 @@ end, 'Logs every controller button press/release. Pass 0 to stop.', 0)
 registerRawGripCounters()
 
 if RegisterAlyxLibAddon and RegisterAlyxLibDiagnostic then
-    local addonID = RegisterAlyxLibAddon("Droppable Weapons", "v1.0.0", "3707778626", "droppable_weapons", "v2.0.0")
+    local addonID = RegisterAlyxLibAddon("Droppable Weapons", "v1.1.0", "3707778626", "droppable_weapons", "v2.0.0")
     RegisterAlyxLibDiagnostic(addonID, diagnose)
 else
     warn('AlyxLib is too old to register Droppable Weapons, alyxlib_diagnose will not be available')
