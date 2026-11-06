@@ -1,6 +1,9 @@
 
 local utils = require('droppable_weapons.utils')
 
+require('droppable_weapons.convars')
+local diagnose = require('droppable_weapons.diagnose')
+
 local handKind = utils.isAkimboEnabled() and InputHandBoth or InputHandPrimary
 
 GlobalPrecache:Add("model_folder", "models/weapons/droppable/")
@@ -168,14 +171,17 @@ local function onUngrip(event)
     if utils.isBodyHolstersEnabled() and type(BodyHolsters) == "table" then
         ---@diagnostic disable-next-line: undefined-global
         if not BodyHolsters:IsHandInAvailableSlot(event.hand) then
-            DroppableWeapons:DropWeapon(nil, event.hand)
+            return DroppableWeapons:DropWeapon(nil, event.hand)
         end
     else
-        DroppableWeapons:DropWeapon(nil, event.hand)
+        return DroppableWeapons:DropWeapon(nil, event.hand)
     end
 end
 
-Input:ListenToButton('release', handKind, DIGITAL_INPUT_USE_GRIP, nil, onUngrip)
+local listenOk, listenErr = pcall(function()
+    Input:ListenToButton('release', handKind, DIGITAL_INPUT_USE_GRIP, nil, diagnose.trackUngrip(onUngrip))
+end)
+diagnose.setListenerResult(listenOk, listenErr, handKind)
 
 if IsFakeVREnabled() then
     local fakevr = require("droppable_weapons.debug.fakevr")
