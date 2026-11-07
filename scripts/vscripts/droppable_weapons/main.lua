@@ -183,6 +183,33 @@ local listenOk, listenErr = pcall(function()
 end)
 diagnose.setListenerResult(listenOk, listenErr, handKind)
 
+-- Some controller bindings (e.g. Windows MR for some players) never fire USE_GRIP,
+-- the grip fires USE instead. USE is also fired by the trigger (along with FIRE),
+-- so this fallback only runs until USE_GRIP has been seen, and ignores holds that started together with FIRE.
+local gripActionSeen = false
+local lastFirePress = -math.huge
+
+pcall(function()
+    Input:ListenToButton('press', handKind, DIGITAL_INPUT_USE_GRIP, nil, function()
+        gripActionSeen = true
+    end)
+
+    -- Only the trigger fires FIRE and MENU_INTERACT, MENU_INTERACT fires at the light end of the pull
+    for _, button in ipairs({ DIGITAL_INPUT_FIRE, DIGITAL_INPUT_MENU_INTERACT }) do
+        Input:ListenToButton('press', handKind, button, nil, function()
+            lastFirePress = Time()
+        end)
+    end
+
+    Input:ListenToButton('release', handKind, DIGITAL_INPUT_USE, nil, function(event)
+        if gripActionSeen then return end
+        local pressTime = event.release_time - event.held_time
+        -- Shooting later while the grip is held must not count as a trigger hold.
+        if math.abs(lastFirePress - pressTime) < 0.25 then return end
+        diagnose.trackUngrip(onUngrip)(event)
+    end)
+end)
+
 if IsFakeVREnabled() then
     local fakevr = require("droppable_weapons.debug.fakevr")
     fakevr.register(function()
